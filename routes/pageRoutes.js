@@ -9,4 +9,5 @@ router.get("/blog", pageControllers.getBlogPage);
 router.get("/cart", pageControllers.getCartPage);
 router.get("/checkout", pageControllers.getCheckoutPage);
 router.get("/contact", pageControllers.getContactPage);
+router.get("/thankyou", pageControllers.getThankyouPage);
 module.exports = router;  

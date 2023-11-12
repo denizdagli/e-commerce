@@ -31,3 +31,6 @@ exports.getCheckoutPage = (req, res) => {
 exports.getContactPage = (req, res) => {
   res.render('contact');
 };
+
+exports.getThankyouPage = (req, res) => 
+  res.render('thankyou');
