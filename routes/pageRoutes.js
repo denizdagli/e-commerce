@@ -7,5 +7,5 @@ router.get("/about", pageControllers.getAboutPage);
 router.get("/services", pageControllers.getServicesPage);
 router.get("/blog", pageControllers.getBlogPage);
 router.get("/cart", pageControllers.getCartPage);
-
+router.get("/checkout", pageControllers.getCheckoutPage);
 module.exports = router;  
