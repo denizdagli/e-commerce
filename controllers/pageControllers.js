@@ -34,3 +34,7 @@ exports.getContactPage = (req, res) => {
 
 exports.getThankyouPage = (req, res) => 
   res.render('thankyou');
+
+exports.getLoginPage = (req, res) => {
+  res.render('login');
+}
