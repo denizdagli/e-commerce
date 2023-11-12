@@ -27,3 +27,7 @@ exports.getCartPage = (req, res) => {
 exports.getCheckoutPage = (req, res) => {
   res.render('checkout');
 };
+
+exports.getContactPage = (req, res) => {
+  res.render('contact');
+};
