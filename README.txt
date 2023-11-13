@@ -4,25 +4,25 @@ Bu proje, Internet Sunucu Programlama Dersi kapsamında geliştirilen "E-Ticaret
 
 ## Gereksinimler
 
-- [Node.js](https://nodejs.org/) yüklü olmalıdır.
+- Node.js (https://nodejs.org/) yüklü olmalıdır.
 
 ## Kurulum
 
 1. Proje klasörünü bilgisayarınıza klonlayın:
 
-    ```bash
-    git clone https://github.com/kullaniciadi/proje-adı.git
+    ```
+    git clone https://github.com/denizdagli/e-commerce.git
     ```
 
 2. Proje klasörüne gidin:
 
-    ```bash
+    ```
     cd proje-adı
     ```
 
 3. Bağımlılıkları yükleyin:
 
-    ```bash
+    ```
     npm install
     ```
 
@@ -30,5 +30,4 @@ Bu proje, Internet Sunucu Programlama Dersi kapsamında geliştirilen "E-Ticaret
 
 Proje klasöründe aşağıdaki komutları kullanarak uygulamayı başlatabilirsiniz:
 
-```bash
-npm start
+```npm start```
