@@ -4,7 +4,7 @@ const ejs = require('ejs');
 require('dotenv').config();
 const pageRoute = require('./routes/pageRoutes');
 const carpet = require('./controllers/routes.js').carpet;
-
+const transferData = require('./controllers/routes.js').transferData;
 const app = express();
 
 
@@ -20,6 +20,7 @@ app.use("/",pageRoute);
 
 
 app.use("/api",carpet)
+app.use("/api",transferData)
 
 // app.use(methodOverride('_method', {
 //   methods: ['POST', 'GET'],

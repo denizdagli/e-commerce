@@ -1,6 +1,6 @@
 const express = require('express');
 const create = require('./db.js');
-
+const transferData = require('./db.js').transferData;
 const router = express.Router()
 
 router.post('/carpets',async(req,res) =>{
@@ -15,6 +15,26 @@ router.post('/carpets',async(req,res) =>{
 }
 });  
 
+router.post('/transferData', async(req,res) =>{
+   try{
+    const {carpet_id} = req.body;
+   
+    if(!carpet_id ){
+        return res.status(400).json({ error: 'carpet_id is required in the request body' });
+    }
+
+    const result = await transferData(carpet_id);
+
+    if(result.success){
+        return res.json({success: true, data: result.data})
+    }
+        return res.status(500).json({success:false ,message :'Error'})
+   } catch (error){
+    console.error(error);
+   }
+})
+
 module.exports = {
-    carpet:router
+    carpet:router,
+    transferData:router
 };
