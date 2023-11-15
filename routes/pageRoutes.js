@@ -12,3 +12,4 @@ router.get("/contact", pageControllers.getContactPage);
 router.get("/thankyou", pageControllers.getThankyouPage);
 router.get("/login", pageControllers.getLoginPage);
 module.exports = router;  
+
