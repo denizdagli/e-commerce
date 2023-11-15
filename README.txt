@@ -1,6 +1,6 @@
 # E-commerce
 
-Bu proje, Internet Sunucu Programlama Dersi kapsamında geliştirilen "E-Ticaret" konulu web sitesidir. için yazılmış bir Node.js uygulamasıdır.
+Bu proje, Internet Sunucu Programlama Dersi kapsamında geliştirilen "E-Ticaret" konulu web sitesi için yazılmış bir Node.js uygulamasıdır.
 
 ## Gereksinimler
 
