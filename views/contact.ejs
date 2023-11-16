@@ -1,10 +1,4 @@
-<!-- /*
-* Bootstrap 5
-* Template Name: Furni
-* Template Author: Untree.co
-* Template URI: https://untree.co/
-* License: https://creativecommons.org/licenses/by/3.0/
-*/ -->
+
 <!doctype html>
 <html lang="en">
 	<%- include ('partials/_header') -%>
@@ -86,34 +80,44 @@
                 </div>
               </div>
 
-              <form>
+              <form action="/contact" method="POST">
                 <div class="row">
                   <div class="col-6">
                     <div class="form-group">
                       <label class="text-black" for="fname">Ad</label>
-                      <input type="text" class="form-control" id="fname">
+                      <input type="text" class="form-control" id="fname" name="name">
                     </div>
                   </div>
                   <div class="col-6">
                     <div class="form-group">
                       <label class="text-black" for="lname">Soyad</label>
-                      <input type="text" class="form-control" id="lname">
+                      <input type="text" class="form-control" id="lname" name="surname">
                     </div>
                   </div>
                 </div>
                 <div class="form-group">
                   <label class="text-black" for="email">Email adresi</label>
-                  <input type="email" class="form-control" id="email">
+                  <input type="email" class="form-control" id="email" name="email">
                 </div>
-
                 <div class="form-group mb-5">
                   <label class="text-black" for="message">Mesaj</label>
-                  <textarea name="" class="form-control" id="message" cols="30" rows="5"></textarea>
+                  <textarea name="message" class="form-control" id="message" cols="30" rows="5"></textarea>
                 </div>
-
                 <button type="submit" class="btn btn-primary-hover-outline">Gönder</button>
               </form>
-
+ 
+              <script>
+                document.addEventListener("DOMContentLoaded", function() {
+                  const formButton = document.querySelector(".btn.btn-primary-hover-outline");
+              
+                  formButton.addEventListener("click", function() {
+                    formButton.style.backgroundColor = "green";
+                  });
+                });
+              </script>
+              
+              
+              
             </div>
 
           </div>
