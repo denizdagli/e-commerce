@@ -1,6 +1,7 @@
 const express = require('express');
 const create = require('./db.js');
 const transferData = require('./db.js').transferData;
+const basketAll = require('./db.js').basketAll;
 const router = express.Router()
 
 router.post('/carpets',async(req,res) =>{
@@ -34,7 +35,19 @@ router.post('/transferData', async(req,res) =>{
    }
 })
 
+router.get('/basketAll',async(req,res) =>{
+    try {
+        const result = await basketAll(res);
+        return res.json({success: true, data: result})
+    } catch (error) {
+        return res.status(500).json({success:false ,message :'Error'})
+    }
+})
+
+
+
 module.exports = {
     carpet:router,
-    transferData:router
+    transferData:router,
+    basketAll:router
 };

@@ -3,6 +3,7 @@ const DynamoDBDocumentClient = require('@aws-sdk/lib-dynamodb').DynamoDBDocument
 
 
 
+
 const client = new DynamoDBClient({
     region: 'us-east-1',
     credentials: {

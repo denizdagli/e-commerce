@@ -5,7 +5,9 @@ require('dotenv').config();
 const pageRoute = require('./routes/pageRoutes');
 const carpet = require('./controllers/routes.js').carpet;
 const transferData = require('./controllers/routes.js').transferData;
+const basketAll = require('./controllers/routes.js').basketAll;
 const app = express();
+
 
 
 //TEMPLATE ENGINE
@@ -21,6 +23,9 @@ app.use("/",pageRoute);
 
 app.use("/api",carpet)
 app.use("/api",transferData)
+
+
+app.use("/api",basketAll)
 
 // app.use(methodOverride('_method', {
 //   methods: ['POST', 'GET'],

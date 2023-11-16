@@ -1,4 +1,5 @@
-const { GetCommand } = require('@aws-sdk/lib-dynamodb');
+const { GetCommand, ScanCommand } = require('@aws-sdk/lib-dynamodb');
+const { json } = require('express');
 
 const Table1 = require('./dbconfig.js').Table1;
 const Table2 = require('./dbconfig.js').Table2;
@@ -54,9 +55,30 @@ const transferData = async function(carpetId) {
     }
 }
 
+const basketAll =async function(){
+    try{
+        const params = {
+            TableName: Table2
+        };
+        const { Items = [] } = await db.send(new ScanCommand(params));
+        const basketData = Items.map(item => ({
+            basket_id:item.basket_id,
+            Carpet_type: item.Carpet_type,
+            price:  item.price
+        }));
+        
+        return basketData;
+    } catch (error) {
+        console.error('DynamoDB Error:', error);
+        res.status(500).json({ success: false, data: null });
+    }
+}
+
+
 
 
 module.exports = {
     create,
-    transferData
+    transferData,
+    basketAll
 };
