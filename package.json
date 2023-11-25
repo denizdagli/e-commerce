@@ -11,11 +11,7 @@
   "license": "ISC",
   "dependencies": {
     "@aws-sdk/client-dynamodb": "^3.451.0",
-<<<<<<< HEAD
     "@aws-sdk/lib-dynamodb": "^3.450.0",
-=======
-    "@aws-sdk/lib-dynamodb": "^3.451.0",
->>>>>>> 414bc1cadbd17d5be718c6322c70430e8d163d6a
     "aws-sdk": "^2.1494.0",
     "dotenv": "^16.3.1",
     "ejs": "^3.1.9",

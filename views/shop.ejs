@@ -1,6 +1,8 @@
 <!doctype html>
 <html lang="en">
+	
 	<%- include ('partials/_header') -%>
+
 
 	<body>
 
@@ -36,9 +38,9 @@
 							<h3 class="product-title">Konya Halısı</h3>
 							<strong class="product-price">$50.00</strong>
 
-							<form action="/cart" method="GET">
+							<form method="GET" onsubmit="return transferData(42)">
 								<button type="submit">
-								  <span class="icon-cross">
+								  <span class="icon-cross" >
 									<img src="images/cross.svg" class="img-fluid">
 								  </span>
 								</button>
@@ -54,7 +56,7 @@
 							<h3 class="product-title">Bursa Halısı</h3>
 							<strong class="product-price">$50.00</strong>
 
-							<form action="/cart" method="GET">
+							<form method="GET" onsubmit="return transferData(16)">
 								<button type="submit">
 								  <span class="icon-cross">
 									<img src="images/cross.svg" class="img-fluid">
@@ -72,9 +74,13 @@
 							<h3 class="product-title">Manisa Halısı</h3>
 							<strong class="product-price">$78.00</strong>
 
-							<span class="icon-cross">
-								<img src="images/cross.svg" class="img-fluid">
-							</span>
+							<form method="GET" onsubmit="return transferData(45)">
+								<button type="submit">
+								  <span class="icon-cross">
+									<img src="images/cross.svg" class="img-fluid">
+								  </span>
+								</button>
+							  </form>
 						</a>
 					</div>
 					<!-- End Column 3 -->
@@ -86,9 +92,13 @@
 							<h3 class="product-title">Trabzon Halısı</h3>
 							<strong class="product-price">$43.00</strong>
 
-							<span class="icon-cross">
-								<img src="images/cross.svg" class="img-fluid">
-							</span>
+							<form method="GET" onsubmit="return transferData(61)">
+								<button type="submit">
+								  <span class="icon-cross">
+									<img src="images/cross.svg" class="img-fluid">
+								  </span>
+								</button>
+							  </form>
 						</a>
 					</div>
 					<!-- End Column 4 -->
@@ -101,9 +111,13 @@
 							<h3 class="product-title">Ankara Halısı</h3>
 							<strong class="product-price">$50.00</strong>
 
-							<span class="icon-cross">
-								<img src="images/cross.svg" class="img-fluid">
-							</span>
+							<form method="GET" onsubmit="return transferData(6)">
+								<button type="submit">
+								  <span class="icon-cross">
+									<img src="images/cross.svg" class="img-fluid">
+								  </span>
+								</button>
+							  </form>
 						</a>
 					</div> 
 					<!-- End Column 1 -->
@@ -114,10 +128,13 @@
 							<img src="images/hali6.jpg" class="img-fluid product-thumbnail">
 							<h3 class="product-title">İzmir Halısı</h3>
 							<strong class="product-price">$50.00</strong>
-
-							<span class="icon-cross">
-								<img src="images/cross.svg" class="img-fluid">
-							</span>
+							<form method="GET" onsubmit="return transferData(35)">
+								<button type="submit">
+								  <span class="icon-cross">
+									<img src="images/cross.svg" class="img-fluid">
+								  </span>
+								</button>
+							  </form>
 						</a>
 					</div> 
 					<!-- End Column 2 -->
@@ -129,9 +146,13 @@
 							<h3 class="product-title">Kütahya Halısı</h3>
 							<strong class="product-price">$78.00</strong>
 
-							<span class="icon-cross">
-								<img src="images/cross.svg" class="img-fluid">
-							</span>
+							<form method="GET" onsubmit="return transferData(43)">
+								<button type="submit">
+								  <span class="icon-cross">
+									<img src="images/cross.svg" class="img-fluid">
+								  </span>
+								</button>
+							  </form>
 						</a>
 					</div>
 					<!-- End Column 3 -->
@@ -143,9 +164,13 @@
 							<h3 class="product-title">Eskişehir Halısı</h3>
 							<strong class="product-price">$43.00</strong>
 
-							<span class="icon-cross">
-								<img src="images/cross.svg" class="img-fluid">
-							</span>
+							<form method="GET" onsubmit="return transferData(26)">
+								<button type="submit">
+								  <span class="icon-cross">
+									<img src="images/cross.svg" class="img-fluid">
+								  </span>
+								</button>
+							  </form>
 						</a>
 					</div>
 					<!-- End Column 4 -->
@@ -161,6 +186,34 @@
 		<script src="js/bootstrap.bundle.min.js"></script>
 		<script src="js/tiny-slider.js"></script>
 		<script src="js/custom.js"></script>
+		<script>
+			async function transferData(carpetId) {
+			try {
+            // HTTP isteği yapmak için fetch API'sini kullandığınızı varsayalım
+            const response = await fetch('/api/transferData', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ carpet_id: carpetId }), // carpet_id'yi istek gövdesinde gönderiyoruz
+            });
+
+            const result = await response.json();
+
+            if (result.success) {
+                console.log('Veri transferi başarılı:', result.data);
+                // Başarı durumunu istemci tarafında işleyin (gerekiyorsa)
+            } else {
+                console.error('Veri transferi başarısız:', result.message);
+                // Başarısızlık durumunu istemci tarafında işleyin (gerekiyorsa)
+            }
+        } catch (error) {
+            console.error('Hata:', error);
+        }
+        // true döndürmek, formun gönderilmesine izin verir (gerekiyorsa)
+        return true;
+    }
+		</script>
 	</body>
 
 </html>

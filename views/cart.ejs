@@ -48,32 +48,8 @@
                           <th class="product-remove">Sil</th>
                         </tr>
                       </thead>
-                      <tbody>
+                      <tbody id="basketBody">
                         
-                        <tr>
-                          <td class="product-thumbnail">
-                            <img src="/images/product-1.png" alt="Image" class="img-fluid">
-                          </td>
-                          <td class="product-name">
-                            <h2 class="h5 text-black">Product 1</h2>
-                          </td>
-                          <td>$49.00</td>
-                          <td>
-                            <div class="input-group mb-3 d-flex align-items-center quantity-container" style="max-width: 120px;">
-                              <div class="input-group-prepend">
-                                <button class="btn btn-outline-black decrease" type="button">&minus;</button>
-                              </div>
-                              <input type="text" class="form-control text-center quantity-amount" value="1" placeholder="" aria-label="Example text with button addon" aria-describedby="button-addon1">
-                              <div class="input-group-append">
-                                <button class="btn btn-outline-black increase" type="button">&plus;</button>
-                              </div>
-                            </div>
-        
-                          </td>
-                          <td>$49.00</td>
-                          <td><a href="#" class="btn btn-black btn-sm">X</a></td>
-                        </tr>
-        
                       </tbody>
                     </table>
                   </div>
@@ -85,7 +61,7 @@
                   <div class="row mb-5">
                     <div class="col-md-6 mb-3 mb-md-0">
                      
-                      <button class="btn btn-black btn-sm btn-block" onclick="updateCart()">Sepeti Güncelle</button>
+                      <button class="btn btn-black btn-sm btn-block" onclick="basketAll()">Sepeti Güncelle</button>
 
 <script>
 function updateCart() {
@@ -154,6 +130,75 @@ function updateCart() {
 		<script src="js/bootstrap.bundle.min.js"></script>
 		<script src="js/tiny-slider.js"></script>
 		<script src="js/custom.js"></script>
+    <script>
+      document.addEventListener('DOMContentLoaded', function () {
+    basketAll();
+  });
+
+      async function basketAll() {
+    try {
+        const response = await fetch('api/basketAll', {
+            method: 'GET', 
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        });
+
+        const result = await response.json();
+
+        if (result.success) {
+            console.log('Veri çekme başarılı:', result.data);
+
+            result.data.forEach(item => {
+                console.log('Ürün Adı:', item.Carpet_type);
+                console.log('Ürün Adı:', item.price);
+                const row = document.createElement('tr');
+
+                    const imageCell = document.createElement('td');
+                    imageCell.className = 'product-thumbnail';
+                    imageCell.innerHTML = `<img src="/images/mainproduct.png" alt="Image" class="img-fluid">`;
+                    row.appendChild(imageCell);
+
+                    const nameCell = document.createElement('td');
+                    nameCell.className = 'product-name';
+                    nameCell.innerHTML = `<h2 class="h5 text-black">${item.Carpet_type}</h2>`;
+                    row.appendChild(nameCell);
+
+                    const priceCell = document.createElement('td');
+                    priceCell.className = 'product-price';
+                    priceCell.innerHTML = `$${item.price}`;
+                    row.appendChild(priceCell);
+
+                    const pieceCell = document.createElement('td');
+                    pieceCell.className = 'product-quantity';
+                    pieceCell.innerHTML = `1`;
+                    row.appendChild(pieceCell);
+
+                    const totalCell = document.createElement('td');
+                    totalCell.className = 'product-total';
+                    totalCell.innerHTML = ``;
+                    row.appendChild(totalCell);
+
+                    const deleteCell = document.createElement('td');
+                    deleteCell.className = 'product-remove';
+                    deleteCell.innerHTML = `<a href="#" class="btn btn-black btn-sm">X</a>`;
+                    row.appendChild(deleteCell);
+
+                    
+                    basketBody.appendChild(row);
+                                });
+
+        } else {
+            console.error('Veri çekme başarısız:', result.message);
+        }
+    } catch (error) {
+        console.error('Hata:', error);
+    }
+    return true;
+}
+
+      
+    </script>
 	</body>
 
 </html>

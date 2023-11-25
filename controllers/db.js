@@ -66,7 +66,6 @@ const basketAll =async function(){
             Carpet_type: item.Carpet_type,
             price:  item.price
         }));
-        
         return basketData;
     } catch (error) {
         console.error('DynamoDB Error:', error);
@@ -80,5 +79,6 @@ const basketAll =async function(){
 module.exports = {
     create,
     transferData,
-    basketAll
+    basketAll,
+
 };
