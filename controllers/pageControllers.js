@@ -32,6 +32,9 @@ exports.getCheckoutPage = (req, res) => {
 exports.getContactPage = (req, res) => {
   res.render('contact');
 };
+exports.getRegisterPage = (req, res) => {
+  res.render('register');
+};
 
 exports.sendMail = (req, res) => {
   const email_address = process.env.NODE_MAIL;

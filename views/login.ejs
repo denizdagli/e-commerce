@@ -5,26 +5,6 @@
 
 	<body>
 
-		<%- include ('partials/_navigation') -%>
-
-		<!-- Start Hero Section -->
-			<div class="hero">
-				<div class="container">
-					<div class="row justify-content-between">
-						<div class="col-lg-5">
-							<div class="intro-excerpt">
-								<h1>Giriş </h1>
-							</div>
-						</div>
-						<div class="col-lg-7">
-							
-						</div>
-					</div>
-				</div>
-			</div>
-		<!-- End Hero Section -->
-
-		
 
 		<div class="untree_co-section">
     <div class="container">
@@ -34,14 +14,21 @@
 		  <div class="login-form">
 			<h2 class="display-3 text-black">Giriş</h2>
 			<form action="/login" method="post">
-				<label for="username">Kullanıcı Adı:</label>
-				<input type="text" id="username" name="username" required>
-	
-				<label for="password">Şifre:</label>
-				<input type="password" id="password" name="password" required>
-	
-				
-                <a href="shop" class="btn btn-sm btn-outline-black">Giriş</a>
+				<div class="container">
+					<div class="row justify-content-center mt-3">
+						<div class="col-3">
+							<label for="username">Kullanıcı Adı:</label>
+							<input type="text" id="username" name="username" required>
+						</div>
+					</div>
+					<div class="row justify-content-center my-3">
+						<div class="col-3">
+							<label for="password">Şifre:</label>
+							<input type="password" id="password" name="password" required>
+						</div>
+					</div>
+				</div>		
+                <a onclick="userAll()" class="btn btn-sm btn-outline-black">Giriş</a>
             </p>
         
 			</form>
@@ -61,5 +48,44 @@
 		<script src="js/tiny-slider.js"></script>
 		<script src="js/custom.js"></script>
 	</body>
-
+    <script>
+        async function userAll() {
+            try {
+                const usernameI = document.getElementById('username').value;
+                const passwordI = document.getElementById('password').value;
+    
+                const response = await fetch('api/userAll', {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                });
+    
+                const result = await response.json();
+    
+                if (result.success) {
+                    console.log('Veri çekme başarılı:', result.data);
+    
+                    const foundUser = result.data.find(item => item.username === usernameI && item.password === passwordI);
+                    
+                    if (foundUser) {
+                        console.log('Kullanıcı bulundu, sayfa yönlendiriliyor...');
+                        localStorage.setItem('usernameI', usernameI);  //login olan kişinin username'ni localStorge kayıt eder.
+                        window.location.href = '/index';
+                    } else {
+                        console.error('Kullanıcı adı veya parola hatalı');
+                        
+                        alert('Kullanıcı adı veya parola hatalı');
+                    }
+    
+                } else {
+                    console.error('Veri çekme başarısız:', result.message);
+                }
+            } catch (error) {
+                console.error('Hata:', error);
+            }
+            return true;
+        }
+    </script>
+    
 </html>

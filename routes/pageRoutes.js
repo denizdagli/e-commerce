@@ -12,5 +12,8 @@ router.get("/contact", pageControllers.getContactPage);
 router.post("/contact", pageControllers.sendMail);
 router.get("/thankyou", pageControllers.getThankyouPage);
 router.get("/login", pageControllers.getLoginPage);
+router.get("/", pageControllers.getLoginPage);
+router.get("/register", pageControllers.getRegisterPage);
+
 module.exports = router;  
 

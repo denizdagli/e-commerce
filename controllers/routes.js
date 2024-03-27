@@ -2,6 +2,8 @@ const express = require('express');
 const create = require('./db.js');
 const transferData = require('./db.js').transferData;
 const basketAll = require('./db.js').basketAll;
+const userAll = require('./db.js').userAll;
+const addUser = require('./db.js').addUser;
 const router = express.Router()
 
 router.post('/carpets',async(req,res) =>{
@@ -44,10 +46,36 @@ router.get('/basketAll',async(req,res) =>{
     }
 })
 
+router.post('/addUser', async (req, res) => {
+    try {
+        const { success, data } = await addUser(req.body);
+
+        if (success) {
+            return res.json({ success, data });
+        } else {
+            return res.status(500).json({ success: false, message: 'Veri eklenirken bir hata oluştu' });
+        }
+    } catch (error) {
+        console.error('Hata:', error);
+        return res.status(500).json({ success: false, message: 'Sunucu hatası' });
+    }
+}); 
+
+router.get('/userAll',async(req,res) =>{
+    try {
+        const result = await userAll(res);
+        return res.json({success: true, data: result})
+    } catch (error) {
+        return res.status(500).json({success:false ,message :'Error'})
+    }
+});
+
 
 
 module.exports = {
     carpet:router,
     transferData:router,
-    basketAll:router
+    basketAll:router,
+    addUser:router,
+    userAll:router,
 };

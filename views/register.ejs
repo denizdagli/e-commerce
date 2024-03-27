@@ -1,0 +1,114 @@
+
+<!doctype html>
+<html lang="en">
+	<%- include ('partials/_header') -%>
+
+	<body>
+
+		<%- include ('partials/_navigation') -%>
+
+
+		<div class="untree_co-section">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12 text-center pt-5">
+         
+		  <div class="login-form" >
+			<h2 class="display-3 text-black">Kullanıcı Kaydet</h2>
+			<form action="/login" method="post" >
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-3">
+                        <label for="user_id">İd:</label>
+				        <input type="text" id="user_id" name="user_id" required>
+                    </div>
+                    <div class="col-3">
+                        <label for="name">Ad:</label>
+				        <input type="text" id="name" name="name" required>
+                    </div>
+                    <div class="col-3">
+                        <label for="name">Soyad:</label>
+				        <input type="text" id="surName" name="surName" required>
+                    </div>
+                </div>
+                <div class="row my-3 justify-content-center">
+                    <div class="col-3">
+                        <label for="username">Kullanıcı Adı:</label>
+                        <input type="text" id="username" name="username" required>
+                    </div>
+                    <div class="col-3">
+                        <label for="password">Şifre:</label>
+				        <input type="password" id="password" name="password" required>
+                    </div>
+                </div>
+                <a onclick="addUser()" class="btn btn-sm btn-outline-black">Kayıt Ol</a>
+            </div>
+            </p>
+        
+			</form>
+		</div>		  
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <%- include ('partials/_footer') -%>
+
+		<script src="js/bootstrap.bundle.min.js"></script>
+		<script src="js/tiny-slider.js"></script>
+		<script src="js/custom.js"></script>
+	</body>
+
+    <script>
+        async function addUser() {
+            try {
+                const user_id = document.getElementById('user_id').value;
+                const username = document.getElementById('username').value;
+                const name = document.getElementById('name').value;
+                const surName = document.getElementById('surName').value;
+                const password = document.getElementById('password').value;
+    
+                // Veriyi JSON formatına dönüştür
+                const data = {
+                    user_id: user_id,
+                    username: username,
+                    name: name,
+                    surname: surName,
+                    password: password
+                };
+    
+                // HTTP isteği yapmak için fetch API'sini kullandığınızı varsayalım
+                const response = await fetch('/api/addUser', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify(data), // Dönüştürülmüş veriyi gönder
+                    });
+
+                    // Yanıtın başarılı olup olmadığını kontrol et
+                    if (!response.ok) {
+                        // Yanıt başarısızsa, HTTP durum kodunu al ve uygun bir hata göster
+                        console.error('HTTP Hatası:', response.status);
+                        return false;
+                    }
+
+                    // Yanıtı JSON olarak işle
+                    const result = await response.json();
+
+                if (result.success) {
+                    console.log('giriş başarılı');
+                    window.location.href = '/';
+                } else {
+                    
+                }
+            } catch (error) {
+                alert('Kayıt olunuz!!');
+                console.error('Hata:', error);
+            }
+            // true döndürmek, formun gönderilmesine izin verir (gerekiyorsa)
+            return true;
+        }
+    </script>
+
+</html>

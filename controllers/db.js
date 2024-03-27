@@ -3,6 +3,7 @@ const { json } = require('express');
 
 const Table1 = require('./dbconfig.js').Table1;
 const Table2 = require('./dbconfig.js').Table2;
+const Table3 = require('./dbconfig.js').Table3;
 const db = require('./dbconfig.js').db;
 const PutCommand = require('@aws-sdk/lib-dynamodb').PutCommand;
 
@@ -73,6 +74,47 @@ const basketAll =async function(){
     }
 }
 
+const addUser = async (data = {}) => {
+    const params = {
+        TableName: Table3,
+        Item: data
+    };
+
+    try {
+        await db.send(new PutCommand(params));
+        return { success: true };
+    } catch (error) {
+        console.error('Create Error:', error);
+
+        return {
+            success: false,
+            error: {
+                message: 'Error while creating data in the database',
+                details: error.message 
+            }
+        };
+    }
+};
+
+const userAll = async function() {
+    try {
+        const params = {
+            TableName: Table3
+        };
+        const { Items = [] } = await db.send(new ScanCommand(params));
+        
+        const userData = Items.map(item => ({
+            username: item.username,
+            password: item.password,
+            name: item.name,
+            surname: item.surname
+        }));
+        
+        return userData;
+    } catch (error) {
+        console.error('DynamoDB Error:', error);
+    }
+}
 
 
 
@@ -80,5 +122,7 @@ module.exports = {
     create,
     transferData,
     basketAll,
+    addUser,
+    userAll
 
 };
